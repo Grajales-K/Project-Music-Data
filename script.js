@@ -1,19 +1,27 @@
 import { getUserIDs, getListenEvents, getSong } from "./data.js";
 
 
-//--------------------- Generating Html ---------------------
+
+//------------------------------- Generating Html ------------------------------
 function createContent() {
   const container = document.querySelector(".container");
+  container.innerHTML = ""; // Clear previous content
 
   const userSection = document.createElement("section");
   userSection.id = "userSection";
 
+  const userLabel = document.createElement("label");
+  userLabel.setAttribute("for", "userDropdown");
+  userLabel.textContent = " Select User:";
   const userSelector = document.createElement("select");
   userSelector.id = "userDropdown";
 
-  //--------------------- appending each var to the container ---------------------
-  userSection.appendChild(userSelector);
-  container.appendChild(userSection);
+  //---------------------------- fetching userIDs -------------------------------
+  const placeholderOption = document.createElement("option");
+  placeholderOption.value = "";
+  placeholderOption.textContent = "Choose a User";
+  placeholderOption.disabled = true;
+  placeholderOption.selected = true;
 
   const users = getUserIDs();
   users.forEach((userID) => {
@@ -23,37 +31,46 @@ function createContent() {
     userSelector.appendChild(option);
   });
 
-  //------------------------ style in the dropdown section -------------------------
+  //--------------------- appending each var to the container -------------------
+  container.appendChild(userSection);
+  userSection.appendChild(userLabel);
+  userSection.appendChild(userSelector);
+  userSelector.appendChild(placeholderOption);
+
+
+
+  //------------------------ style userSection section -------------------------
   Object.assign(userSection.style, {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     padding: "10px",
-    backgroundColor: "lightblue", 
-    borderRadius: "8px", 
-    marginBottom: "20px", 
+    backgroundColor: "lightblue",
+    borderRadius: "8px",
+    marginBottom: "20px",
     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
   });
 
-  //------------------------ style in the dropdown select -------------------------
-  Object.assign(userDropdown.style, {
+  //--------------------------- Dropdown select style -------------------------
+  Object.assign(userSelector.style, {
     padding: "12px 20px",
-    fontSize: "16px", 
-    border: "2px solid #007BFF", 
-    borderRadius: "8px", 
-    backgroundColor: "#f8f8f8", 
-    color: "#333", 
+    fontSize: "16px",
+    border: "2px solid #007BFF",
+    borderRadius: "8px",
+    backgroundColor: "#f8f8f8",
+    color: "#333",
     cursor: "pointer",
-    width: "140px",
-    transition: "all 0.3s ease", 
+    width: "200px",
+    transition: "all 0.3s ease",
+    marginLeft: "1rem",
   });
 }
 
 
 
 window.onload = function () {
- 
   createContent();
+
 };
 
 
