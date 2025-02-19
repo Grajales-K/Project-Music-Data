@@ -44,10 +44,12 @@ function createContent() {
     backgroundColor: "#f8f8f8", 
     color: "#333", 
     cursor: "pointer",
-    width: "200px",
+    width: "140px",
     transition: "all 0.3s ease", 
   });
 }
+
+
 
 window.onload = function () {
  
