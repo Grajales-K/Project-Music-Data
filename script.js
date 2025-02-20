@@ -47,6 +47,7 @@ function createContent() {
     borderRadius: "8px",
     marginBottom: "20px",
     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+    color: "#000",
   });
 
   //--------------------------- Dropdown select style -------------------------
@@ -55,8 +56,8 @@ function createContent() {
     fontSize: "16px",
     border: "2px solid #007BFF",
     borderRadius: "8px",
-    backgroundColor: "#f8f8f8",
-    color: "#333",
+    backgroundColor: "#ffffff", 
+    color: "#333", 
     cursor: "pointer",
     width: "200px",
     transition: "all 0.3s ease",
@@ -78,7 +79,7 @@ function createTable() {
 
   const table = document.createElement("table");
   table.id = "musicTable";
-  table.style.width = "75%";
+  table.style.width = "60%";
   table.style.border = "1px solid black";
   table.style.borderCollapse = "collapse";
   table.style.marginTop = "20px";
@@ -92,11 +93,11 @@ function createTable() {
   ["Question", "Answer"].forEach((text) => {
     const th = document.createElement("th");
     th.textContent = text;
-    th.style.border = "1px solid black";
+    th.style.border = "2px solid black";
     th.style.padding = "8px";
     th.style.textAlign = "center";
-    th.style.backgroundColor = "#007BFF";
-    th.style.color = "white";
+    th.style.backgroundColor = "#0056b3"; 
+    th.style.color = "#fff"; 
     headerRow.appendChild(th);
   });
 
@@ -110,6 +111,27 @@ function createTable() {
 
   container.appendChild(table);
 }
+
+//---------------Function to update the table dynamically -----------------
+function updateTable(data) {
+  const tbody = document.getElementById("musicTableBody");
+  tbody.innerHTML = "";
+  data.forEach((entry) => {
+    const row = document.createElement("tr");
+    const questionCell = document.createElement("td");
+    questionCell.textContent = entry.question;
+    questionCell.style.border = "1px solid black";
+    questionCell.style.padding = "8px";
+    const answerCell = document.createElement("td");
+    answerCell.textContent = entry.answer;
+    answerCell.style.border = "1px solid black";
+    answerCell.style.padding = "8px";
+    row.appendChild(questionCell);
+    row.appendChild(answerCell);
+    tbody.appendChild(row);
+  });
+}
+
 
 // ---------------------------- Event listener -----------------------------
 function handleUserSelection(event) {
@@ -128,13 +150,10 @@ function showTable() {
   }
 }
 
-
 // ------------------- Setting up event listeners only once ------------------------
 function setUpEvents(userSelector) {
   userSelector.addEventListener("change", handleUserSelection);
 }
-
-
 
 window.onload = function () {
   const userSelector = createContent();
@@ -142,7 +161,7 @@ window.onload = function () {
   setUpEvents(userSelector);
 };
 
-export { createContent, createTable, handleUserSelection };
+export { createContent, createTable, handleUserSelection, updateTable };
 
 
 
