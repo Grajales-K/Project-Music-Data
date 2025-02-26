@@ -56,8 +56,8 @@ function createContent() {
     fontSize: "16px",
     border: "2px solid #007BFF",
     borderRadius: "8px",
-    backgroundColor: "#ffffff", 
-    color: "#333", 
+    backgroundColor: "#ffffff",
+    color: "#333",
     cursor: "pointer",
     width: "200px",
     transition: "all 0.3s ease",
@@ -68,7 +68,7 @@ function createContent() {
   userSelector.addEventListener("change", (event) => {
     const userID = event.target.value;
     if (userID) {
-      processUserData(userID); 
+      processUserData(userID);
     }
   });
 }
@@ -96,8 +96,8 @@ function createTable() {
     th.style.border = "2px solid black";
     th.style.padding = "8px";
     th.style.textAlign = "center";
-    th.style.backgroundColor = "#0056b3"; 
-    th.style.color = "#fff"; 
+    th.style.backgroundColor = "#0056b3";
+    th.style.color = "#fff";
     headerRow.appendChild(th);
   });
 
@@ -112,26 +112,53 @@ function createTable() {
   container.appendChild(table);
 }
 
-//---------------Function to update the table dynamically -----------------
-function updateTable(data) {
-  const tbody = document.getElementById("musicTableBody");
-  tbody.innerHTML = "";
-  data.forEach((entry) => {
-    const row = document.createElement("tr");
-    const questionCell = document.createElement("td");
-    questionCell.textContent = entry.question;
-    questionCell.style.border = "1px solid black";
-    questionCell.style.padding = "8px";
-    const answerCell = document.createElement("td");
-    answerCell.textContent = entry.answer;
-    answerCell.style.border = "1px solid black";
-    answerCell.style.padding = "8px";
-    row.appendChild(questionCell);
-    row.appendChild(answerCell);
-    tbody.appendChild(row);
-  });
+function deleteElement(elementID) {
+  const el = document.getElementById(elementID);
+
+  if (el) {
+    el.remove();
+  }
 }
 
+function createMessage() {
+  const container = document.querySelector(".container");
+  const message = document.createElement("span");
+  message.id = "noUserMessage";
+  message.textContent = "No music for this user";
+  container.appendChild(message);
+}
+
+//---------------Function to update the table dynamically -----------------
+function updateTable(data) {
+  if (!data) {
+    deleteElement("musicTable");
+    createMessage();
+    // create a DOM element that states there is no data
+    // insert it into the page
+  } else {
+    const table = document.getElementById("musicTable");
+    if (!table) {
+      createTable();
+    }
+    deleteElement("noUserMessage");
+    const tbody = document.getElementById("musicTableBody");
+    tbody.innerHTML = "";
+    data.forEach((entry) => {
+      const row = document.createElement("tr");
+      const questionCell = document.createElement("td");
+      questionCell.textContent = entry.question;
+      questionCell.style.border = "1px solid black";
+      questionCell.style.padding = "8px";
+      const answerCell = document.createElement("td");
+      answerCell.textContent = entry.answer;
+      answerCell.style.border = "1px solid black";
+      answerCell.style.padding = "8px";
+      row.appendChild(questionCell);
+      row.appendChild(answerCell);
+      tbody.appendChild(row);
+    });
+  }
+}
 
 // ---------------------------- Event listener -----------------------------
 function handleUserSelection(event) {
@@ -142,36 +169,26 @@ function handleUserSelection(event) {
   }
 }
 
-// --------------------- Function to display table visible ---------------------- 
+// --------------------- Function to display table visible ----------------------
 function showTable() {
   const table = document.getElementById("musicTable");
   if (table) {
-    table.style.display = "table"; 
+    table.style.display = "table";
   }
 }
 
-// ------------------- Setting up event listeners only once ------------------------
-function setUpEvents(userSelector) {
-  userSelector.addEventListener("change", handleUserSelection);
-}
+// // ------------------- Setting up event listeners only once ------------------------
+// function setUpEvents(userSelector) {
+//   userSelector.addEventListener("change", handleUserSelection);
+// }
 
 window.onload = function () {
-  const userSelector = createContent();
-  createTable();
-  setUpEvents(userSelector);
+  createContent();
+  // createTable();
+  // setUpEvents(userSelector);
 };
 
 export { createContent, createTable, handleUserSelection, updateTable };
-
-
-
-
-
-
-
-
-
-
 
 // // -------------- testing what user listen in their history -----------------
 // // const users = getUserIDs();
@@ -186,4 +203,3 @@ export { createContent, createTable, handleUserSelection, updateTable };
 // //     `the user ${userID} listen "${song.title}" of ${song.artist} on ${event.timestamp}`
 // //   );
 // // });
-
