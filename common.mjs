@@ -12,8 +12,8 @@
 //   Top genres
 // */
 
-import { getListenEvents, getSong } from "./data.js";
-import { updateTable } from "./script.js";
+import { getListenEvents, getSong } from "./data.mjs";
+import { updateTable } from "./script.mjs";
 
 /**
  * Processes user listening data and extracts key insights.
@@ -189,5 +189,3 @@ export function getGenres(topGenres) {
 // True && True => True  Show
 
 //"" ==  False
-
-///HI Iam here

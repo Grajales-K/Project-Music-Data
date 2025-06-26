@@ -1,5 +1,5 @@
-import { getUserIDs } from "./data.js";
-import { processUserData } from "./common.js";
+import { getUserIDs } from "./data.mjs";
+import { processUserData } from "./common.mjs";
 
 //------------------------------- Generating Html Selector ------------------------------
 function createContent() {
