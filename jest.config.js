@@ -1,7 +1,8 @@
-// jest.config.js
 export default {
-  testEnvironment: "jsdom", // ✅ Correct value
   transform: {},
-  moduleFileExtensions: ["js", "mjs", "json", "node"],
-  testMatch: ["**/?(*.)+(spec|test).@(js|mjs)"],
+  testEnvironment: "jsdom", // or "jest-environment-jsdom"
+  moduleNameMapper: {
+    "\\.(css|less|scss|sass)$": "identity-obj-proxy",
+  },
+  testMatch: ["**/*.test.mjs"],
 };

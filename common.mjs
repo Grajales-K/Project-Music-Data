@@ -184,8 +184,3 @@ export function getGenres(topGenres) {
   return { question: label, answer: topGenres.join(", ") };
 }
 
-// Answer && Question ?
-// False && True  => False Not Show
-// True && True => True  Show
-
-//"" ==  False
