@@ -1,15 +1,38 @@
+// data.mjs
+// This module acts as a simplified "data source" or data layer for the music project.
+// In a real-world application, these functions would typically interact with a backend
+// database or an external API to fetch actual user listening data and song information.
+// For this project, it provides hardcoded data, simulating how such data would be
+// structured and accessed. This abstraction allows the core logic in `common.mjs`
+// to remain independent of the actual data storage mechanism.
+
+/**
+ * @function getUserIDs
+ * @description Provides a hardcoded list of user IDs available in the system.
+ * @returns {string[]} An array of strings, where each string is a unique user ID.
+ */
 export function getUserIDs() {
+  // Returns a fixed array of user IDs. The project uses "1", "2", "3", "4".
   return ["1", "2", "3", "4"];
 }
 
+/**
+ * @function getSong
+ * @description Retrieves detailed information about a specific song given its ID.
+ * It simulates a lookup operation in a song database.
+ * @param {string} songID - The unique identifier for the song to retrieve.
+ * @returns {Object|undefined} An object containing song details (id, artist, title,
+ * duration_seconds, genre), or `undefined` if the songID is not found.
+ */
 export function getSong(songID) {
+  // A hardcoded array of song objects. Each object represents a song with its metadata.
   const songs = [
     {
-      id: "song-1",
-      artist: "The King Blues",
-      title: "I Got Love",
-      duration_seconds: 190,
-      genre: "Punk",
+      id: "song-1", // Unique identifier for the song.
+      artist: "The King Blues", // The artist of the song.
+      title: "I Got Love", // The title of the song.
+      duration_seconds: 190, // The duration of the song in seconds.
+      genre: "Punk", // The genre of the song.
     },
     {
       id: "song-2",
@@ -75,16 +98,30 @@ export function getSong(songID) {
       genre: "Pop",
     },
   ];
+  // Uses the `find()` array method to search for a song object where its `id` matches the provided `songID`.
+  // If a match is found, the song object is returned; otherwise, `undefined` is returned.
   return songs.find((song) => song.id === songID);
 }
 
+/**
+ * @function getListenEvents
+ * @description Provides a hardcoded collection of listening events for different users.
+ * This simulates a user's listening history data, sorted chronologically.
+ * @param {string} userID - The ID of the user whose listening events are to be retrieved.
+ * @returns {Array<Object>|undefined} An array of listening event objects for the specified user,
+ * or `undefined` if no events are found for that user. Each event object contains
+ * `timestamp` (ISO string) and `song_id`.
+ */
 export function getListenEvents(userID) {
+  // A large object where keys are user IDs and values are arrays of listening events.
+  // This structure mimics how a database might store user-specific data.
   return {
     1: [
+      // Listening events for User 1
       {
-        timestamp: "2024-08-01T00:20:07",
-        seconds_since_midnight: 1207,
-        song_id: "song-9",
+        timestamp: "2024-08-01T00:20:07", // The precise date and time of the listening event in ISO 8601 format.
+        seconds_since_midnight: 1207, // The number of seconds from midnight for this timestamp (optional, but provided).
+        song_id: "song-9", // The ID of the song listened to.
       },
       {
         timestamp: "2024-08-01T02:00:31",
